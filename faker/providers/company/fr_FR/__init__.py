@@ -351,7 +351,7 @@ class Provider(CompanyProvider):
         Generates a siren number (9 digits). Formatted as '### ### ###'.
         """
         code = self.numerify("########")
-        luhn_checksum = str(calculate_luhn(float(code)))
+        luhn_checksum = str(calculate_luhn(code))
         return f"{code[:3]} {code[3:6]} {code[6:]}{luhn_checksum}"
 
     def siret(self, max_sequential_digits: int = 2) -> str:
@@ -370,7 +370,7 @@ class Provider(CompanyProvider):
         sequential_number = str(self.random_number(max_sequential_digits)).zfill(4)
 
         code = self.siren().replace(" ", "") + sequential_number
-        luhn_checksum = str(calculate_luhn(float(code)))
+        luhn_checksum = str(calculate_luhn(code))
         return f"{code[:3]} {code[3:6]} {code[6:9]} {code[9:]}{luhn_checksum}"
 
     def company_vat(self, siren: str = "") -> str:

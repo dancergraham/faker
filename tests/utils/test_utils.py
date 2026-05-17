@@ -109,12 +109,19 @@ class UtilsTestCase(unittest.TestCase):
         check_digit = calculate_luhn("7992739871")
         assert check_digit == 3
 
+    def test_luhn_checksum_accepts_int(self):
+        check_digit = calculate_luhn(7992739871)
+        assert check_digit == 3
+
     def test_valid_luhn(self):
         """
         Tests if the number has a valid check digit
         Example from wiki https://en.wikipedia.org/wiki/Luhn_algorithm
         """
         assert luhn_checksum("79927398713") == 0
+
+    def test_valid_luhn_accepts_int(self):
+        assert luhn_checksum(79927398713) == 0
 
     def test_invalid_luhn(self):
         """
